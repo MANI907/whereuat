@@ -145,4 +145,42 @@ const IndexPage = () => {
   );
 };
 
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxT5tUWqZyzZ3VDD0yKYHcicteM3JCGMH4b5NfsZ3uE4aybh1BeJNwY7fpgC4_LtyNPwA/exec'; // Google Apps Script 웹 앱 URL
+
+async function logVisit() {
+  try {
+    // 접속 데이터 수집
+    const id = 'USER_ID'; // 고유 ID가 있다면 설정 (예: 사용자 ID 또는 UUID)
+    const landingUrl = window.location.href;
+    const ip = await fetch('https://api.ipify.org?format=json').then(res => res.json()).then(data => data.ip);
+    const referer = document.referrer || 'Direct';
+    const utm = new URLSearchParams(window.location.search).get('utm') || 'No UTM';
+    const device = navigator.userAgent || 'Unknown Device';
+
+    // Google Apps Script로 전송할 URL
+    const params = new URLSearchParams({
+      id: id,
+      landingUrl: landingUrl,
+      ip: ip,
+      referer: referer,
+      utm: utm,
+      device: device
+    });
+
+    const response = await fetch(`${GOOGLE_SCRIPT_URL}?${params.toString()}`);
+    if (response.ok) {
+      console.log('Visit logged successfully.');
+    } else {
+      console.error('Failed to log visit.');
+    }
+  } catch (error) {
+    console.error('Error logging visit:', error);
+  }
+}
+
+// 페이지 로드 시 접속 이력 기록
+window.addEventListener('load', logVisit);
+
+
+
 export default IndexPage;
