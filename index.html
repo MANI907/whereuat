@@ -224,7 +224,7 @@
                     <div class="form-helper-text">
                         * 이메일 주소를 입력해주시면 wearUat의 최신 소식을 보내드립니다!
                     </div>
-                    <textarea id="submit-advice" name="feedback" placeholder="소중한 의견을 적어주세요!" style="width: 100%; height: 120px; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; resize: none;"></textarea>
+                    <textarea id="submit-feedback" name="feedback" placeholder="소중한 의견을 적어주세요!" style="width: 100%; height: 120px; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; resize: none;"></textarea>
                     <button type="button" onclick="submitAction()" style="padding: 10px 20px; background-color: #01754E; color: #fff; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
                         <i class="lni lni-envelope"></i>  보내기
                     </button>
@@ -351,6 +351,7 @@
         console.log(json);
         try {
             ip = json.ip;
+            console.log(ip);
         } catch (e) {
             ip = "unknown";
         }
@@ -405,70 +406,6 @@
     // Device 정보 가져오기
     var mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? 'mobile' : 'desktop';
 
-
-    /*********** submit alert *************/
-    function submitAlert() {
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "top-top",
-            showConfirmButton: false,
-            timer: 2000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener("mouseenter", Swal.stopTimer);
-                toast.addEventListener("mouseleave", Swal.resumeTimer);
-            },
-        });
-
-        Toast.fire({
-            icon: "success",
-            title: "소중한 의견 감사합니다! 곧 좋은 서비스로 만나요!",
-        });
-    }
-
-    /*********** submit action ***********/
-    function submitAction() {
-        $.busyLoadFull("show"); // progress bar show
-        const email = $("#submit-email").val();
-        const advice = $("#submit-advice").val();
-
-        function validateEmail(email) {
-            var re =
-                /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-            return re.test(email);
-        }
-
-        if (email == "" || !validateEmail(email)) {
-            alert("이메일이 유효하지 않아 알림을 드릴 수가 없습니다. ");
-            $.busyLoadFull("hide"); // progress bar hide
-            return;
-        }
-
-        axios
-            .get(
-                "https://script.google.com/macros/s/AKfycbyOBWxzUpv70apVAUPn-og5x-Od_HOjfUOvkQyeL8xtKMKFWR9HHU3YEfgLhnsgElQG/exec",
-                {
-                    params: {
-                        action: "insert",
-                        table: "registration",
-                        data: JSON.stringify({
-                            id: getUVfromCookie(),
-                            email: email.replace(/[\n\r\t]/g, ""), // 특수 문자 제거
-                            advice: advice.replace(/[\n\r\t]/g, ""), // 특수 문자 제거
-                        }),
-                    },
-                }
-            )
-            .then((response) => {
-                $.busyLoadFull("hide"); // progress bar hide
-                submitAlert();
-                console.log(response.data.data);
-                // alert(JSON.stringify(response));
-                $("#submit-email").val("");
-                $("#submit-advice").val("");
-            });
-    }
-
 </script>
 <script>
     /* data를 만들 땐 모든 field가 들어 있어야 함 */
@@ -498,18 +435,79 @@
             console.log('실패 - ', JSON.stringify(xhr));
             }
         });
-
-
-        /*axios.get(addrScript+'?action=insert&table=visitor&data='+data)
-            .then(response => {
-                console.log(JSON.stringify(response));
-                $('<div id="result" style="font-size:10px; width:200px; word-wrap: break-word; text-overflow: ellipsis; overflow:hidden"></div>').appendTo('#wrapper');
-                $('#result').text(JSON.stringify(response));
-            })
-*/
     });
 </script>
+<script>
 
+    /*********** submit alert *************/
+    function submitAlert() {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-top",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener("mouseenter", Swal.stopTimer);
+                toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+        });
+
+        Toast.fire({
+            icon: "success",
+            title: "소중한 의견 감사합니다! 곧 좋은 서비스로 만나요!",
+        });
+    }
+
+    /*********** submit action ***********/
+    function submitAction() {
+        $.busyLoadFull("show"); // progress bar show
+        const email = $("#submit-email").val();
+        const feedback = $("#submit-feedback").val();
+
+        function validateEmail(email) {
+            var re =
+                /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+            return re.test(email);
+        }
+
+        if (email == "" || !validateEmail(email)) {
+            alert("이메일이 유효하지 않아 알림을 드릴 수가 없습니다. ");
+            $.busyLoadFull("hide"); // progress bar hide
+            return;
+        }
+
+        $.ajax({
+            url: "https://script.google.com/macros/s/AKfycbyOBWxzUpv70apVAUPn-og5x-Od_HOjfUOvkQyeL8xtKMKFWR9HHU3YEfgLhnsgElQG/exec",
+            method: "GET",
+            data: {
+                action: "insert",
+                table: "feedback",
+                data: JSON.stringify({
+                    id: getUVfromCookie(),
+                    email: email.replace(/[\n\r\t]/g, ""), // 특수 문자 제거
+                    advice: advice.replace(/[\n\r\t]/g, ""), // 특수 문자 제거
+                }),
+            },
+            dataType: "jsonp",
+            success: function (response) {
+                $.busyLoadFull("hide"); // progress bar hide
+                submitAlert();
+                console.log(response.data);
+                // alert(JSON.stringify(response));
+                $("#submit-email").val("");
+                $("#submit-feedback").val("");
+            },
+            error: function (xhr, status, error) {
+                console.error("Error:", error);
+            },
+        });
+
+
+
+    }
+
+</script>
 </body>
 
 </html>
