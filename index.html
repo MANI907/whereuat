@@ -351,10 +351,8 @@
 <script type="application/javascript">
     var ip = "null";
     function getIP(json) {
-        console.log(json);
         try {
             ip = json.ip;
-            console.log(ip);
         } catch (e) {
             ip = "unknown";
         }
@@ -432,10 +430,10 @@
                 "Content-Type": "text/plain;charset=utf-8",
             },
             success: function (data) {
-            console.log('성공 - ', JSON.stringify(data));
+            //console.log('성공 - ', JSON.stringify(data));
             },
             error: function (xhr) {
-            console.log('실패 - ', JSON.stringify(xhr));
+                console.log('실패 - ', JSON.stringify(xhr));
             }
         });
     });
@@ -496,7 +494,6 @@
             success: function (response) {
                 $.busyLoadFull("hide"); // progress bar hide
                 submitAlert();
-                console.log(response.data);
                 // alert(JSON.stringify(response));
                 $("#submit-email").val("");
                 $("#submit-feedback").val("");
