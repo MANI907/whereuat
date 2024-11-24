@@ -2315,6 +2315,11 @@ ol {
   text-transform: capitalize;
 }
 
+.our-achievement .single-achievement img {
+  width: 80px;
+  height: 80px;
+}
+
 @media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
   .our-achievement .title h2 {
     font-size: 20px;
