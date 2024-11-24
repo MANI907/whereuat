@@ -219,12 +219,13 @@
                     <p class="wow fadeInUp" data-wow-delay=".6s">wearUat에 대한 의견이나 제안이 있으신가요?<br>여러분의 소중한 피드백이 더 나은 서비스를 만드는 데 큰 힘이 됩니다.😊</p>
                 </div>
                 <form action="#" style="max-width: 700px; margin: 0 auto;">
-                    <input type="email" name="email" placeholder="이메일 주소(선택)" style="width: 100%; padding: 10px; margin-bottom: 2px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
+<!--                    <input type="email" name="email" placeholder="이메일 주소(선택)" style="width: 100%; padding: 10px; margin-bottom: 2px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">-->
+                    <input id="submit-email" type="email" name="email" placeholder="이메일주소를 입력주세요!" aria-label="Email address" autocomplete="email" required="" style="width: 100%; padding: 10px; margin-bottom: 2px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">>
                     <div class="form-helper-text">
                         * 이메일 주소를 입력해주시면 wearUat의 최신 소식을 보내드립니다!
                     </div>
-                    <textarea name="feedback" placeholder="소중한 의견을 적어주세요!" style="width: 100%; height: 120px; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; resize: none;"></textarea>
-                    <button type="submit" style="padding: 10px 20px; background-color: #01754E; color: #fff; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+                    <textarea id="submit-advice" name="feedback" placeholder="소중한 의견을 적어주세요!" style="width: 100%; height: 120px; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; resize: none;"></textarea>
+                    <button type="button" onclick="submitAction()" style="padding: 10px 20px; background-color: #01754E; color: #fff; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
                         <i class="lni lni-envelope"></i>  보내기
                     </button>
                 </form>
@@ -232,11 +233,7 @@
         </div>
     </div>
 </section>
-<!--/ End Cont Area -->
-<div id="popup" style="display:none;">
-    <h1>감사합니다. </h1>
-    <p>이제는 우리는 같은 배를 탔습니다.  </p>
-</div>
+
 <!-- Start Footer Area -->
 <footer class="footer">
     <!-- Start Footer Top -->
@@ -348,34 +345,20 @@
 <link href="https://cdn.jsdelivr.net/npm/busy-load/dist/app.min.css" rel="stylesheet">
 
 <!-- Custom Script -->
-<script>
-    $(document).ready(function () {
-        // 방문 이력 데이터 생성
-        var data = JSON.stringify({
-            id: getUVfromCookie(),
-            landingUrl: window.location.href,
-            ip: ip,
-            referer: document.referrer,
-            time_stamp: getTimeStamp(),
-            utm: utm, // http://127.0.0.1:5500/index.html?utm=campaign1 호출 시 utm 값을 가져옴
-            device: mobile,
-        });
-
-    });
-
-    // IP 가져오기
+<script type="application/javascript">
     var ip = "null";
-
     function getIP(json) {
+        console.log(json);
         try {
-            $.getJSON('https://api.ipify.org?format=jsonp&callback=?', function(data) {
-                ip = data.ip;
-            });
+            ip = json.ip;
         } catch (e) {
-            ip = 'unknown';
+            ip = "unknown";
         }
+        return;
     }
-
+</script>
+<script type="application/javascript" src="https://jsonip.com?format=jsonp&amp;callback=getIP"></script>
+<script>
     // 유저 ID 쿠키 관리
     function getCookieValue(name) {
         const value = "; " + document.cookie;
@@ -422,6 +405,70 @@
     // Device 정보 가져오기
     var mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? 'mobile' : 'desktop';
 
+
+    /*********** submit alert *************/
+    function submitAlert() {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-top",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener("mouseenter", Swal.stopTimer);
+                toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+        });
+
+        Toast.fire({
+            icon: "success",
+            title: "소중한 의견 감사합니다! 곧 좋은 서비스로 만나요!",
+        });
+    }
+
+    /*********** submit action ***********/
+    function submitAction() {
+        $.busyLoadFull("show"); // progress bar show
+        const email = $("#submit-email").val();
+        const advice = $("#submit-advice").val();
+
+        function validateEmail(email) {
+            var re =
+                /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+            return re.test(email);
+        }
+
+        if (email == "" || !validateEmail(email)) {
+            alert("이메일이 유효하지 않아 알림을 드릴 수가 없습니다. ");
+            $.busyLoadFull("hide"); // progress bar hide
+            return;
+        }
+
+        axios
+            .get(
+                "https://script.google.com/macros/s/AKfycbyOBWxzUpv70apVAUPn-og5x-Od_HOjfUOvkQyeL8xtKMKFWR9HHU3YEfgLhnsgElQG/exec",
+                {
+                    params: {
+                        action: "insert",
+                        table: "registration",
+                        data: JSON.stringify({
+                            id: getUVfromCookie(),
+                            email: email.replace(/[\n\r\t]/g, ""), // 특수 문자 제거
+                            advice: advice.replace(/[\n\r\t]/g, ""), // 특수 문자 제거
+                        }),
+                    },
+                }
+            )
+            .then((response) => {
+                $.busyLoadFull("hide"); // progress bar hide
+                submitAlert();
+                console.log(response.data.data);
+                // alert(JSON.stringify(response));
+                $("#submit-email").val("");
+                $("#submit-advice").val("");
+            });
+    }
+
 </script>
 <script>
     /* data를 만들 땐 모든 field가 들어 있어야 함 */
@@ -462,6 +509,7 @@
 */
     });
 </script>
+
 </body>
 
 </html>
