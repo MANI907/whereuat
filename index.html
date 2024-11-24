@@ -445,10 +445,13 @@
 
         addrScript = 'https://script.google.com/macros/s/AKfycbyOBWxzUpv70apVAUPn-og5x-Od_HOjfUOvkQyeL8xtKMKFWR9HHU3YEfgLhnsgElQG/exec';
 
-        /*
+
         $.ajax({
             url: addrScript+'?action=insert&table=visitors&data='+data,
             dataType: 'jsonp',
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8",
+            },
             success: function (data) {
             console.log('성공 - ', JSON.stringify(data));
             },
@@ -456,15 +459,15 @@
             console.log('실패 - ', JSON.stringify(xhr));
             }
         });
-        });*/
 
-        axios.get(addrScript+'?action=insert&table=visitor&data='+data)
+
+        /*axios.get(addrScript+'?action=insert&table=visitor&data='+data)
             .then(response => {
                 console.log(JSON.stringify(response));
                 $('<div id="result" style="font-size:10px; width:200px; word-wrap: break-word; text-overflow: ellipsis; overflow:hidden"></div>').appendTo('#wrapper');
                 $('#result').text(JSON.stringify(response));
             })
-
+*/
     });
 </script>
 </body>
