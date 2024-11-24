@@ -220,7 +220,7 @@
                 </div>
                 <form action="#" style="max-width: 700px; margin: 0 auto;">
 <!--                    <input type="email" name="email" placeholder="이메일 주소(선택)" style="width: 100%; padding: 10px; margin-bottom: 2px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">-->
-                    <input id="submit-email" type="email" name="email" placeholder="이메일주소를 입력주세요!" aria-label="Email address" autocomplete="email" required="" style="width: 100%; padding: 10px; margin-bottom: 2px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">>
+                    <input id="submit-email" type="email" name="email" placeholder="이메일주소를 입력주세요!" aria-label="Email address" autocomplete="email" required="" style="width: 100%; padding: 10px; margin-bottom: 2px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
                     <div class="form-helper-text">
                         * 이메일 주소를 입력해주시면 wearUat의 최신 소식을 보내드립니다!
                     </div>
@@ -486,7 +486,7 @@
                 data: JSON.stringify({
                     id: getUVfromCookie(),
                     email: email.replace(/[\n\r\t]/g, ""), // 특수 문자 제거
-                    advice: advice.replace(/[\n\r\t]/g, ""), // 특수 문자 제거
+                    feedback: feedback.replace(/[\n\r\t]/g, ""), // 특수 문자 제거
                 }),
             },
             dataType: "jsonp",
