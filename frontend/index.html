@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지 설명 생성기</title>
+</head>
+<body>
+<h1>이미지 설명 생성기</h1>
+
+<form id="upload-form">
+    <label for="image">이미지를 업로드하세요:</label>
+    <input type="file" id="image" name="image" accept="image/*" required>
+    <button type="submit">업로드</button>
+</form>
+
+<h2>AI 설명:</h2>
+<p id="result"></p>
+
+<script>
+    document.getElementById('upload-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        const formData = new FormData();
+        const imageFile = document.getElementById('image').files[0];
+        formData.append('image', imageFile);
+
+        try {
+            const response = await fetch('/generate', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+            document.getElementById('result').textContent = result.description || result.error;
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+</script>
+</body>
+</html>
