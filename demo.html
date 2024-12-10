@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>wearUat - Unlock the hidden potential of your wardrobe</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+
+  <!-- ========================= CSS here ========================= -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/LineIcons.2.0.css" />
+  <link rel="stylesheet" href="assets/css/animate.css" />
+  <link rel="stylesheet" href="assets/css/tiny-slider.css" />
+  <link rel="stylesheet" href="assets/css/glightbox.min.css" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Fetcher</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    #weather-result {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      display: none;
+    }
+  </style>
+</head>
+<header class="header navbar-area">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-12">
+        <div class="nav-inner">
+          <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="index.html">
+              <img src="assets/images/logo/white-logo.png" alt="Logo">
+            </a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<section class="our-achievement section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-12">
+        <div class="my-slider">
+          <div class="single-achievement wow fadeInUp">
+            <img src="assets/images/연말모임1.png" alt="코디 1">
+            <h3>코디 1</h3>
+            <p>심플한 데일리룩</p>
+          </div>
+          <div class="single-achievement wow fadeInUp">
+            <img src="assets/images/연말모임2.png" alt="코디 2">
+            <h3>코디 2</h3>
+            <p>비즈니스 캐주얼</p>
+          </div>
+          <div class="single-achievement wow fadeInUp">
+            <img src="assets/images/연말모임3.png" alt="코디 3">
+            <h3>코디 3</h3>
+            <p>스포티 캐주얼</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="features2" class="features section">
+  <div class="container">
+    <div class="single-feature wow fadeInUp weather-card">
+      <h3>OOO님의 오늘은,</h3>
+      <h3><span id="name"></span> / <span id="description"></span>    <i class="lni lni-sun"></i></h3>
+      <p><strong>현재 기온:</strong> <span id="temp"></span>°C / <strong>체감 온도:</strong> <span id="feels_like"></span>°C</p>
+      <p><strong>최저 기온:</strong> <span id="temp_min"></span>°C / <strong>최고 기온:</strong> <span id="temp_max"></span>°C</p>
+    </div>
+  </div>
+</section>
+
+<body>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    tns({
+      container: '.my-slider',
+      items: 1, // 한 슬라이드에 카드 1개만 보이도록 설정
+      slideBy: 'page',
+      autoplay: true,
+      autoplayTimeout: 3000,
+      controls: true,
+      nav: true,
+      controls: false,
+      autoplayButtonOutput: false,
+    });
+  });
+</script>
+<script src="js/weather.js"></script>
+<script src="assets/js/tiny-slider.js"></script>
+</body>
+</html>

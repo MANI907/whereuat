@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>wearUat - Unlock the hidden potential of your wardrobe</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/LineIcons.2.0.css" />
+    <link rel="stylesheet" href="assets/css/animate.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/tiny-slider.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px; /* 모바일 화면 크기 제한 */
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            max-width: 120px;
+        }
+
+        .outfit-section img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .outfit-description {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .weather-section {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .weather-header {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .weather-info {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .schedule {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .bottom-menu {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .bottom-menu div {
+            text-align: center;
+        }
+
+        .bottom-menu i {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: #007bff;
+        }
+        .bottom-menu i {
+            color: black; /* 아이콘 색상 설정 */
+        }
+
+        .bottom-menu div {
+            text-align: center;
+        }
+
+        .bottom-menu p {
+            margin: 5px 0 0;
+            font-size: 12px;
+            color: black; /* 텍스트 색상도 검은색으로 */
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <!-- 로고 -->
+    <div class="logo">
+        <img src="assets/images/logo/white-logo.png" alt="Logo">
+    </div>
+
+    <div class="outfit-section">
+        <!-- 슬라이드 컨테이너 -->
+        <div class="my-slider">
+            <!-- 슬라이드 1 -->
+            <div class="single-achievement">
+                <img src="assets/images/연말모임1.png" alt="코디 1">
+                <p class="outfit-description">
+                    #블랙새틴롱스커트 #연말모임룩 #니트롱스커트조합
+                </p>
+            </div>
+            <div class="single-achievement">
+                <img src="assets/images/연말모임2.png" alt="코디 2">
+                <p class="outfit-description">
+                    #니트청바지조합 #꾸안꾸 #패딩코디
+                </p>
+            </div>
+            <div class="single-achievement">
+                <img src="assets/images/연말모임3.png" alt="코디 3">
+                <p class="outfit-description">
+                    #블랙코트코디 #연말모임룩 #겨울부츠코디
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- 날씨 섹션 -->
+    <div class="weather-section">
+        <p class="weather-header">OO님의 오늘은,</p>
+        <p class="weather-info">12/10 (화)<br>서울 현재 기온 <span id="temp"></span>°C, <span id="description"></span>☀️<br>
+        최저 기온:<span id="temp_min"></span>°C / 최고 기온:<span id="temp_max"></span>°C️</p>
+        <div class="schedule">
+            <p>14:30 인터페이스 설계 회의</p>
+            <p>19:00 을지로 저녁 모임</p>
+        </div>
+    </div>
+
+    <!-- 하단 메뉴 -->
+    <div class="bottom-menu">
+        <div>
+            <img src="assets/images/closet.png" alt="CLOSET Icon" style="width: 30px; height: 30px;">
+            <p>CLOSET</p>
+        </div>
+        <div>
+            <i class="lni lni-plus"></i>
+            <p>ADD</p>
+        </div>
+        <div>
+            <i class="lni lni-search"></i>
+            <p>SEARCH</p>
+        </div>
+        <div>
+            <i class="lni lni-user"></i>
+            <p>MY</p>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        tns({
+            container: '.my-slider',
+            items: 1, // 한 슬라이드에 카드 1개만 보이도록 설정
+            slideBy: 'page',
+            autoplay: true,
+            autoplayTimeout: 3000,
+            controls: true,
+            nav: true,
+            controls: false,
+            autoplayButtonOutput: false,
+        });
+    });
+</script>
+<script src="assets/js/tiny-slider.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        tns({
+            container: '.my-slider',
+            items: 1, // 한 번에 카드 1개씩
+            slideBy: 'page',
+            autoplay: true,
+            autoplayTimeout: 3000,
+            controls: false, // prev, next 버튼 제거
+            nav: false, // 네비게이션 점 제거
+            autoplayButtonOutput: false
+        });
+
+        // 날씨 가져오기
+        fetchWeather();
+    });
+
+    function fetchWeather() {
+        const apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=8595004cf8946741069cc55e6f01bc57&lang=kr&units=metric';
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("description").textContent = data.weather[0].description;
+                document.getElementById("temp").textContent = data.main.temp.toFixed(1); // 현재 기온
+                document.getElementById("feels_like").textContent = data.main.feels_like.toFixed(1); // 체감 온도
+                document.getElementById("temp_min").textContent = data.main.temp_min.toFixed(1); // 최저 기온
+                document.getElementById("temp_max").textContent = data.main.temp_max.toFixed(1); // 최고 기온
+            })
+            .catch(error => console.error('Error fetching weather:', error));
+    }
+</script>
+</body>
+</html>

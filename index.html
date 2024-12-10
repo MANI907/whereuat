@@ -74,9 +74,9 @@
                                 </li>
                             </ul>
                         </div> <!-- navbar collapse -->
-                   <!--     <div class="button add-list-button">
-                            <a href="javascript:void(0)" class="btn">지금 시작하기</a>
-                        </div>-->
+                        <!--     <div class="button add-list-button">
+                                 <a href="javascript:void(0)" class="btn">지금 시작하기</a>
+                             </div>-->
                     </nav>
                     <!-- End Navbar -->
                 </div>
@@ -94,12 +94,12 @@
                 <div class="hero-content">
                     <h1 class="wow fadeInLeft" data-wow-delay=".4s">오늘의 스타일, 오늘의 나</h1>
                     <p class="wow fadeInLeft" data-wow-delay=".6s">"오늘 뭐 입지?" 고민에서 벗어나세요!</br>wearUat은 옷장 속 아이템을 활용해 그 날의 날씨와 스케줄에 맞춘 최적의 스타일을 제안합니다.</p>
-                    <!--                        <div class="button wow fadeInLeft" data-wow-delay=".8s">
-                                                <a href="javascript:void(0)" class="btn"><i class="lni lni-apple"></i> App Store</a>
-                                                <a href="javascript:void(0)" class="btn btn-alt"><i class="lni lni-play-store"></i> Google
-                                                    Play</a>
-                                            </div>-->
-                </div>
+<!--                     <div class="button wow fadeInLeft" data-wow-delay=".8s">-->
+<!--                         <a href="javascript:void(0);" onclick="goDemo();" class="btn">wearUat 백업</a>-->
+<!--                    </div>-->
+                    <div class="button wow fadeInLeft" data-wow-delay=".8s">
+                        <a href="javascript:void(0);" onclick="goDemo2();" class="btn">wearUat 살짝 맛보기</a>
+                    </div>
             </div>
             <div class="col-lg-7 col-md-12 col-12">
                 <div class="hero-image wow fadeInRight" data-wow-delay=".4s">
@@ -222,7 +222,7 @@
                     <p class="wow fadeInUp" data-wow-delay=".6s">wearUat에 대한 의견이나 제안이 있으신가요?<br>여러분의 소중한 피드백이 더 나은 서비스를 만드는 데 큰 힘이 됩니다.😊</p>
                 </div>
                 <form action="#" style="max-width: 700px; margin: 0 auto;">
-<!--                    <input type="email" name="email" placeholder="이메일 주소(선택)" style="width: 100%; padding: 10px; margin-bottom: 2px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">-->
+                    <!--                    <input type="email" name="email" placeholder="이메일 주소(선택)" style="width: 100%; padding: 10px; margin-bottom: 2px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">-->
                     <input id="submit-email" type="email" name="email" placeholder="이메일주소를 입력주세요!" aria-label="Email address" autocomplete="email" required="" style="width: 100%; padding: 10px; margin-bottom: 2px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
                     <div class="form-helper-text">
                         * 이메일 주소를 입력해주시면 wearUat의 최신 소식을 보내드립니다!
@@ -258,9 +258,9 @@
                     <li><a href="javascript:void(0)"><i class="lni lni-youtube"></i></a></li>
                     <li><a href="javascript:void(0)"><i class="lni lni-pinterest"></i></a></li>
                 </ul>
-<!--                <p class="copyright-text">Designed and Developed by <a href="https://uideck.com/"
-                                                                       rel="nofollow" target="_blank">UIdeck</a>
-                </p>-->
+                <!--                <p class="copyright-text">Designed and Developed by <a href="https://uideck.com/"
+                                                                                       rel="nofollow" target="_blank">UIdeck</a>
+                                </p>-->
             </div>
             <!-- End Single Widget -->
         </div>
@@ -433,7 +433,7 @@
                 "Content-Type": "text/plain;charset=utf-8",
             },
             success: function (data) {
-            //console.log('성공 - ', JSON.stringify(data));
+                //console.log('성공 - ', JSON.stringify(data));
             },
             error: function (xhr) {
                 console.log('실패 - ', JSON.stringify(xhr));
@@ -505,11 +505,16 @@
                 console.error("Error:", error);
             },
         });
-
-
-
+    }
+</script>
+<script>
+    function goDemo() {
+        window.location.href = "demo.html"; // 원하는 데모 페이지 URL로 변경
     }
 
+    function goDemo2() {
+        window.location.href = "demo2.html"; // 원하는 데모 페이지 URL로 변경
+    }
 </script>
 </body>
 
