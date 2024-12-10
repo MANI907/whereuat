@@ -3019,3 +3019,75 @@ form {
   text-align: left;
 }
 
+   /* 전체 섹션 중앙 정렬 */
+ #features .row {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   min-height: 100vh; /* 화면의 100% 높이 */
+ }
+
+/* features 섹션을 화면의 정중앙에 배치 */
+#features2 .row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* 화면의 100% 높이 */
+}
+
+
+/* 날씨 카드 스타일 */
+.weather-card {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+  max-width: 100%;
+  text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+/* 제목 스타일 */
+.weather-card h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+/* 텍스트 스타일 */
+.weather-card p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.my-slider {
+  display: flex;
+  overflow: hidden; /* 슬라이드 밖 내용 숨기기 */
+}
+
+/* 슬라이드 카드 스타일 */
+.my-slider .single-achievement {
+  text-align: center;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 0 auto; /* 가운데 정렬 */
+  width: 100%; /* 카드가 컨테이너를 꽉 채우도록 설정 */
+}
+
+.my-slider img {
+  width: 100%; /* 이미지 너비를 카드와 맞춤 */
+  height: 400px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.my-slider h3 {
+  margin-top: 15px;
+  font-size: 24px;
+  color: #333;
+}
+
+.my-slider p {
+  color: #666;
+  font-size: 18px;
+}
