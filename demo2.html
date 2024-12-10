@@ -142,9 +142,9 @@
     </div>
     <!-- 날씨 섹션 -->
     <div class="weather-section">
-        <p class="weather-header">OO님의 오늘은,</p>
-        <p class="weather-info">12/10 (화)<br>서울 현재 기온 <span id="temp"></span>°C, <span id="description"></span>☀️<br>
-        최저 기온:<span id="temp_min"></span>°C / 최고 기온:<span id="temp_max"></span>°C️</p>
+        <p class="weather-header">OOO님의 오늘은,</p>
+        <p class="weather-info">12/10 (화)<br>서울 현재 기온 <span id="temp"></span>°C, <span id="description"></span>☀️</p>
+        <p class="weather-info">최저 기온:<span id="temp_min"></span>°C / 최고 기온:<span id="temp_max"></span>°C️</p>
         <div class="schedule">
             <p>14:30 인터페이스 설계 회의</p>
             <p>19:00 을지로 저녁 모임</p>
@@ -208,15 +208,22 @@
         const apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=8595004cf8946741069cc55e6f01bc57&lang=kr&units=metric';
 
         fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("description").textContent = data.weather[0].description;
-                document.getElementById("temp").textContent = data.main.temp.toFixed(1); // 현재 기온
-                document.getElementById("feels_like").textContent = data.main.feels_like.toFixed(1); // 체감 온도
-                document.getElementById("temp_min").textContent = data.main.temp_min.toFixed(1); // 최저 기온
-                document.getElementById("temp_max").textContent = data.main.temp_max.toFixed(1); // 최고 기온
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
             })
-            .catch(error => console.error('Error fetching weather:', error));
+            .then(data => {
+                // 데이터를 HTML 요소에 반영
+                document.getElementById("description").textContent = data.weather[0].description;
+                document.getElementById("temp").textContent = data.main.temp.toFixed(1);
+                document.getElementById("temp_min").textContent = data.main.temp_min.toFixed(1);
+                document.getElementById("temp_max").textContent = data.main.temp_max.toFixed(1);
+            })
+            .catch(error => {
+                console.error('Error fetching weather:', error);
+            });
     }
 </script>
 </body>
